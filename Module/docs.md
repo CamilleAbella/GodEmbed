@@ -63,10 +63,10 @@ $title My isolated Title $end
 
 #### Syntax
 
-$author 
+$author
 *<a href="#256">name</a>* \[<a href="#and">$and<a>]  
 \[*<a href="#img">image</a>*] \[<a href="#and">$and<a>]  
-\[*<a href="#url-type">url</a>*] \[<a href="#end">$end<a>]  
+\[*<a href="#url-type">url</a>*] \[<a href="#end">$end<a>]
 
 #### Examples
 
@@ -132,9 +132,9 @@ $title My isolated Description $end
 
 #### Syntax
 
-$footer 
+$footer
 *<a href="#2048">text</a>* \[<a href="#and">$and<a>]  
-\[*<a href="#img">image</a>*] \[<a href="#end">$end<a>]  
+\[*<a href="#img">image</a>*] \[<a href="#end">$end<a>]
 
 #### Examples
 
@@ -242,10 +242,10 @@ $thumbnail http://www.website.com/image.png $end
 
 #### Syntax
 
-$field 
+$field
 *<a href="#256">name</a>* \[<a href="#and">$and<a>]  
 *<a href="#1024">value</a>* \[<a href="#and">$and<a>]  
-\[<a href="#bool">inline<a>] \[<a href="#end">$end<a>]  
+\[<a href="#bool">inline<a>] \[<a href="#end">$end<a>]
 
 #### Examples
 
@@ -350,6 +350,7 @@ The $and keyword is used to separate the arguments when the delimitation becomes
 ```
 $tag arg $and arg
 ```
+
 ```
 $tag 
 multiline
@@ -378,7 +379,8 @@ $tag $blank $and arg
 
 #### Usage
 
-The $null keyword is used to define an optional argument as nonexistent. This can be used for example if you want to omit an optional argument after a multiline argument... Or if you want to give an optional argument lying after an argument that you do not want to define.
+The $null keyword is used to define an optional argument as nonexistent. This can be used for example if you want to omit an optional argument after a multiline argument... Or if you want to give an
+optional argument lying after an argument that you do not want to define.
 
 #### Examples
 
@@ -441,7 +443,9 @@ arg => /(?:true|false)/i.test(arg) ? /true/i.test(arg) : 'invalid'
 #### Validation
 
 ```js
-arg => /(?:https?:\/\/(?:www\.|(?!www))[a-z\d][a-z\d-]+[a-z\d]\.[^\s]{2,}|www\.[a-z\d][a-z\d-]+[a-z\d]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-z\d]+\.[^\s]{2,}|www\.[a-z\d]+\.[^\s]{2,})/i.test(arg) ? arg : 'invalid'
+arg => /(?:https?:\/\/(?:www\.|(?!www))[a-z\d][a-z\d-]+[a-z\d]\.[^\s]{2,}|www\.[a-z\d][a-z\d-]+[a-z\d]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-z\d]+\.[^\s]{2,}|www\.[a-z\d]+\.[^\s]{2,})/i.test(arg) ?
+       arg :
+       'invalid'
 ```
 
 #### Potential
@@ -475,7 +479,7 @@ arg => /\S+\.(?:jpg|jpeg|gif|png|bmp|webp)/i.test(arg) ? arg : 'invalid'
 #### Validation
 
 ```js
-arg => arg.length > 0 ? arg.slice(0,2048) : 'invalid'
+arg => arg.length > 0 ? arg.slice(0, 2048) : 'invalid'
 ```
 
 #### Potential
@@ -492,7 +496,7 @@ arg => arg.length > 0 ? arg.slice(0,2048) : 'invalid'
 #### Validation
 
 ```js
-arg => arg.length > 0 ? arg.slice(0,1024) : 'invalid'
+arg => arg.length > 0 ? arg.slice(0, 1024) : 'invalid'
 ```
 
 #### Potential
@@ -509,7 +513,7 @@ arg => arg.length > 0 ? arg.slice(0,1024) : 'invalid'
 #### Validation
 
 ```js
-arg => arg.length > 0 ? arg.slice(0,256) : 'invalid'
+arg => arg.length > 0 ? arg.slice(0, 256) : 'invalid'
 ```
 
 #### Potential
@@ -526,13 +530,7 @@ arg => arg.length > 0 ? arg.slice(0,256) : 'invalid'
 #### Validation
 
 ```js
-arg => /now/i.test(arg) ? Date.now() : (
-    !isNaN(Number(arg)) ? (
-        moment(Number(arg)).isValid() ? Number(arg) : 'invalid'
-    ) : (
-        moment(arg).isValid() ? moment(arg).valueOf() : 'invalid'
-    )
-)
+arg => /now/i.test(arg) ? Date.now() : (!Number.isNaN(Number(arg)) ? (dayjs(Number(arg)).isValid() ? Number(arg) : 'invalid') : (dayjs(arg).isValid() ? moment(arg).valueOf() : 'invalid'))
 ```
 
 #### Potential
@@ -551,9 +549,7 @@ arg => /now/i.test(arg) ? Date.now() : (
 #### Validation
 
 ```js
-arg => /(?:(?:0x){0,1}|#{0,1})(?:[0-9A-F]{8}|[0-9A-F]{6})/i.test(arg) ? (
-    arg.startsWith('#') ? arg : Number(arg)
-) : 'invalid'
+arg => /(?:(?:0x){0,1}|#{0,1})(?:[0-9A-F]{8}|[0-9A-F]{6})/i.test(arg) ? (arg.startsWith('#') ? arg : Number(arg)) : 'invalid'
 ```
 
 #### Potential
